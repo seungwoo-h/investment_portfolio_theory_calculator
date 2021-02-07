@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        IPT Calculator
+    </title>
+    <style>
+    </style>
+</head>
+<h1> IPT Calculator </h1>
+<body>
+    <div>
+    <h3> Current Yield</h3>
+    <form method="GET" action="/calc_cur_yield">
+        <div>
+            <label for="annual_coupon"> Annual coupon </label>
+            <input type="text" name="annual_coupon">
+        </div>
+        <div>
+            <label for="bond_price"> Bond price </label>
+            <input type="text" name="bond_price">
+        </div>
+        <div class='button'>
+            <button type="submit">Calculate</button>
+        </div>
+    </form>
+    <div>
+        <h5> result </h5>
+        {{ result1 }}
+    </div>
+    </div>
+    <br>
+    <div>
+        <h3> Effective Annual Yield</h3>
+        <form method="GET" action="/calc_eay">
+            <div>
+                <label for="i"> i </label>
+                <input type="text" name="i">
+            </div>
+            <div>
+                <label for="days"> days </label>
+                <input type="text" name="days">
+            </div>
+            <div class='button'>
+                <button type="submit">Calculate</button>
+            </div>
+        </form>
+        <div>
+            <h5> result </h5>
+            {{ result2 }}
+        </div>
+        </div>
+        <br>
+    <div>
+        <h3> YTM</h3>
+        <form method="GET" action="/calc_yield_to_maturity">
+            <div>
+                <label for="T"> T </label>
+                <input type="text" name="T">
+            </div>
+            <div>
+                <label for="C"> C </label>
+                <input type="text" name="C">
+            </div>
+            <div>
+                <label for="bond_price"> bond price </label>
+                <input type="text" name="bond_price">
+            </div>
+            <div>
+                <label for="face_value"> face_value </label>
+                <input type="text" name="face_value">
+            </div>
+            <div class='button'>
+                <button type="submit">Calculate</button>
+            </div>
+        </form>
+        <div>
+            <h5> result </h5>
+            {{ result3 }}
+        </div>
+    </div>
+    <div>
+        <h3>YTM to Forward Rate</h3>
+        <form method="GET" action="/calc_ytm_to_fr">
+            <div>
+                <label for="ytm_lst"> YTM list </label>
+                <input type="text" name="ytm_lst">
+            </div>
+            <div class='button'>
+                <button type="submit">Calculate</button>
+            </div>
+        </form>
+            <div>
+            {% for table in tables %}
+                {{ table|safe }}
+            {% endfor %}
+            </div>
+    </div>
+    <div>
+        <h3>Prices to YTM and Forward Rate</h3>
+        <form method="GET" action="/calc_prices_to_ytm_fr">
+            <div>
+                <label for="price_lst"> YTM list </label>
+                <input type="text" name="price_lst">
+            </div>
+            <div class='button'>
+                <button type="submit">Calculate</button>
+            </div>
+        </form>
+            <div>
+            {% for table in tables2 %}
+                {{ table|safe }}
+            {% endfor %}
+            </div>
+    </div>
+</body>
+</html>
