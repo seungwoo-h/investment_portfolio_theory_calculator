@@ -1,1 +1,3 @@
-# ipt_calculator
+# Investments & Financial Calculator
+
+WIP
