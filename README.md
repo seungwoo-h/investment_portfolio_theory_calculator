@@ -1,3 +1,7 @@
 # Investments & Financial Calculator
 
-WIP
+**Updates Weekly**
+
+http://swhong.pythonanywhere.com/  
+
+Report - rct120@naver.com
