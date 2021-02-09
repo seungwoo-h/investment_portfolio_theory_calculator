@@ -10,33 +10,6 @@
 <h1><a href={{ url_for('main_get') }}> IPT Calculator </a></h1>
 IPT1 - UvA Finance 2021
 <body>
-        <h3> YTM</h3>
-        <form method="GET" action="/calc_yield_to_maturity">
-            <div>
-                <label for="T"> T </label>
-                <input type="text" name="T">
-            </div>
-            <div>
-                <label for="C"> C </label>
-                <input type="text" name="C">
-            </div>
-            <div>
-                <label for="bond_price"> bond price </label>
-                <input type="text" name="bond_price">
-            </div>
-            <div>
-                <label for="face_value"> face_value </label>
-                <input type="text" name="face_value">
-            </div>
-            <div class='button'>
-                <button type="submit">Calculate</button>
-            </div>
-        </form>
-        <br>
-        <div>
-            {{ result3 }}
-        </div>
-    </div>
     <div>
         <h3>YTM to Forward Rate</h3>
         <form method="GET" action="/calc_ytm_to_fr">
@@ -73,6 +46,68 @@ IPT1 - UvA Finance 2021
             {% for table in tables2 %}
             {{ table|safe }}
             {% endfor %}
+            </div>
+    </div>
+    <div>
+        <h3>Duration & Convexity Table</h3>
+        <form method="GET" action="/calc_duration_convexity">
+            <div>
+                <label for="y_value"> y </label>
+                <input type="text" name="y_value">
+            </div>
+            <div>
+                <label for="T"> T </label>
+                <input type="text" name="T">
+            </div>
+            <div>
+                <label for="face_value"> face value </label>
+                <input type="text" name="face_value">
+            </div>
+            <div>
+                <label for="c_rate_or_payment"> Coupon rate OR Coupon payment </label>
+                <input type="text" name="c_rate_or_payment">
+            </div>
+            <div class='button'>
+                <button type="submit">Calculate</button>
+            </div>
+        </form>
+        <br>
+            <div>
+            {{ result6 }}
+            {{ duration }}
+            {{ convexity}}
+            {% for table in tables3 %}
+            {{ table|safe }}
+            {% endfor %}
+            
+            </div>
+    </div>
+    <div>
+        <h3>Bond portfolio weights and amount</h3>
+        <form method="GET" action="/calc_p_weights_amount">
+            <div>
+                <label for="d_liability"> Duration liability </label>
+                <input type="text" name="d_liability">
+            </div>
+            <div>
+                <label for="d_a"> Duration 1st Bond </label>
+                <input type="text" name="d_a">
+            </div>
+            <div>
+                <label for="d_b"> Duration 2nd Bond </label>
+                <input type="text" name="d_b">
+            </div>
+            <div>
+                <label for="pv_l"> PV Liability </label>
+                <input type="text" value='Leave this if not needed' onfocus="this.value=1" name="pv_l">
+            </div>
+            <div class='button'>
+                <button type="submit">Calculate</button>
+            </div>
+        </form>
+        <br>
+            <div>
+            {{ result7 }}
             </div>
     </div>
 </body>
