@@ -105,7 +105,7 @@ def calc_p_weights_amount(num=None):
                 result = f'1st Bond Weight: {w_a} \t 2nd Bond Weight: {w_b} \t 1st Bond Amount: {amount_a} \t 2nd Bond Amount: {amount_b}'
             return render_template('index.html', result7=result)
         except:
-            return render_template('index.html', result6='ERROR: Wrong Value')
+            return render_template('index.html', result7='ERROR: Wrong Value')
 
 
 
