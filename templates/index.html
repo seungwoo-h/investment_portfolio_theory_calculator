@@ -54,19 +54,19 @@
         <form method="GET" action="/calc_duration_convexity">
             <div>
                 <label for="y_value"> y </label>
-                <input type="text" name="y_value">
+                <input type="text" name="y_value" size="8">
             </div>
             <div>
                 <label for="T"> T </label>
-                <input type="text" name="T">
+                <input type="text" name="T" size="8">
             </div>
             <div>
                 <label for="face_value"> face value </label>
-                <input type="text" name="face_value">
+                <input type="text" name="face_value" size="8">
             </div>
             <div>
                 <label for="c_rate_or_payment"> Coupon rate OR Coupon payment </label>
-                <input type="text" name="c_rate_or_payment">
+                <input type="text" name="c_rate_or_payment" size="8">
             </div>
             <div class='button'>
                 <button type="submit">Calculate</button>
@@ -88,19 +88,19 @@
         <form method="GET" action="/calc_p_weights_amount">
             <div>
                 <label for="d_liability"> Duration liability </label>
-                <input type="text" name="d_liability">
+                <input type="text" name="d_liability" size="8">
             </div>
             <div>
                 <label for="d_a"> Duration 1st Bond </label>
-                <input type="text" name="d_a">
+                <input type="text" name="d_a" size="8">
             </div>
             <div>
                 <label for="d_b"> Duration 2nd Bond </label>
-                <input type="text" name="d_b">
+                <input type="text" name="d_b" size="8">
             </div>
             <div>
                 <label for="pv_l"> PV Liability </label>
-                <input type="text" value='Click & leave this as 1 if not needed' onfocus="this.value=1" name="pv_l">
+                <input type="text" value='Click & leave this as 1 if not needed' onfocus="this.value=1" name="pv_l" size="30">
             </div>
             <div class='button'>
                 <button type="submit">Calculate</button>
@@ -121,30 +121,30 @@
             </div>
             <div>
                 <label for="er_1"> E(r1) </label>
-                <input type="text" name="er_1">
+                <input type="text" name="er_1" size="8">
 
                 <label for="er_2"> E(r2) </label>
-                <input type="text" name="er_2">
-            </br>
-                <label for="std_1"> std. dev 1 </label>
-                <input type="text" name="std_1">
-
-                <label for="std_2"> std. dev 2 </label>
-                <input type="text" name="std_2">
+                <input type="text" name="er_2" size="8">
             </br>
                 <label for="eR_1"> E(R1) </label>
-                <input type="text" name="eR_1">
+                <input type="text" name="eR_1" size="8">
 
                 <label for="eR_2"> E(R2) </label>
-                <input type="text" name="eR_2">
+                <input type="text" name="eR_2" size="8">
+            </br>
+                <label for="std_1"> std. dev 1 </label>
+                <input type="text" name="std_1" size="8">
+
+                <label for="std_2"> std. dev 2 </label>
+                <input type="text" name="std_2" size="8">
             </br>
                 <input type="radio" name="coef_or_cov" id="coef" value="coef"> Coef </input>
                 <input type="radio" name="coef_or_cov" id="cov" value="cov"> Cov </input>
                 <label for="coc_val"> </label>
-                <input type="text" name="coc_val">
+                <input type="text" name="coc_val" size="8">
             </br>
                 <label for="A_val"> A </label>
-                <input type="text" name="A_val">
+                <input type="text" name="A_val" size="8">
             </div>
             <div class='button'>
                 <button type="submit">Calculate</button>
@@ -162,18 +162,18 @@
                 <input type="radio" name="coef_or_cov" id="coef" value="coef"> Coef </input>
                 <input type="radio" name="coef_or_cov" id="cov" value="cov"> Cov </input>
                 <label for="coc_val"> </label>
-                <input type="text" name="coc_val">
+                <input type="text" name="coc_val" size="8">
             </div>
             <div>
                 <label for="w1"> w1 </label> 
-                <input type="text" name="w1">
+                <input type="text" name="w1" size="8">
                 <label for="w2"> w2 </label> 
-                <input type="text" name="w2">
+                <input type="text" name="w2" size="8">
             </br>
                 <label for="std_1"> std. dev 1 </label>
-                <input type="text" name="std_1">
+                <input type="text" name="std_1" size="8">
                 <label for="std_2"> std. dev 2 </label>
-                <input type="text" name="std_2">
+                <input type="text" name="std_2" size="8">
             </div>
             <div class='button'>
                 <button type="submit">Calculate</button>
