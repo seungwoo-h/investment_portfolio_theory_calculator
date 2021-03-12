@@ -134,8 +134,51 @@ def portfolio_amount(duration_liability, duration_a, duration_b, pv_liability=1)
     amount_a, amount_b = w_a * pv_liability, w_b * pv_liability
     return w_a, w_b, amount_a, amount_b
 
+################# WEEK 3 #################
+
+def covariance(coef, std_1, std_2):
+    return coef * std_1 * std_2
+
+def cov_finder(kwargs_dct, std_1, std_2):
+    assert len(kwargs_dct) == 1
+    for key, value in kwargs_dct.items():
+        if key == 'cov':
+            cov = value
+        elif key == 'coef':
+            cov = covariance(value, std_1, std_2)
+        break
+    return cov
+
+def portfolio_return_two_assets(w1, w2, er_1, er_2):
+    return w1 * er_1 + w2 * er_2
+
+def portfolio_risk_two_assets(w1, w2, std_1, std_2, **kwargs):
+    cov = cov_finder(kwargs, std_1, std_2)
+    variance = w1**2 * std_1**2 + w2**2 * std_2**2 + 2 * w1 * w2 * cov
+    return variance ** 0.5
+
+def weights_markowitz_minimum_variance(std_1, std_2, **kwargs):
+    cov = cov_finder(kwargs, std_1, std_2)
+    w1 = (std_2**2 - cov) / (std_1**2 + std_2**2 - 2 * cov)
+    w2 = 1 - w1
+    return w1, w2
+        
+def weights_markowitz_optimal_two_risky(A, er_1, er_2, std_1, std_2, coef):
+    w1 = (er_1 - er_2 + A * (std_2**2 - std_1 * std_2 * coef)) / (A * (std_1**2 + std_2**2 - 2 * std_1 * std_2 * coef))
+    w2 = 1 - w1
+    return w1, w2
+
+def weights_markowits_optimal_two_riksy_one_free(eR_1, eR_2, std_1, std_2, **kwargs):
+    cov = cov_finder(kwargs, std_1, std_2)
+    w1 = (eR_1 * std_2**2 - eR_2 * cov) / (eR_1 * std_2**2 + eR_2 * std_1**2 - (eR_1 + eR_2) * cov)
+    w2 = 1 - w1
+    return w1, w2
+
 ##########################################
 
 if __name__ == '__main__':
-    print(duration_convex_table(0.07, 10, 1000, 0.07))
-    print(duration_convex_table(0.08, 10, 1000, 0.07))
+    print('All Functions Loaded.')
+    # print(duration_convex_table(0.07, 10, 1000, 0.07))
+    # print(duration_convex_table(0.08, 10, 1000, 0.07))
+    print(portfolio_risk_two_assets(0.5, 0.5, 0.1, 0.2, coef=0.8))
+    print(weights_markowitz_minimum_variance(0.2, 0.354, cov=0.1))

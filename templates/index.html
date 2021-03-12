@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>
         IPT Calculator
     </title>
@@ -99,7 +100,7 @@ IPT1 - UvA Finance 2021
             </div>
             <div>
                 <label for="pv_l"> PV Liability </label>
-                <input type="text" value='Leave this if not needed' onfocus="this.value=1" name="pv_l">
+                <input type="text" value='Click & leave this as 1 if not needed' onfocus="this.value=1" name="pv_l">
             </div>
             <div class='button'>
                 <button type="submit">Calculate</button>
@@ -109,6 +110,80 @@ IPT1 - UvA Finance 2021
             <div>
             {{ result7 }}
             </div>
+    </div>
+    <div>
+        <h3>Markowitz Weights</h3>
+        <form method="GET" action="/calc_markowitz_weights">
+            <div>
+                <input type="radio" name="options" id="option1" value="option1"> Min. Variance - 2 risky </input><br>
+                <input type="radio" name="options" id="option2" value="option2"> Optimal - 2 risky & no risk-free  </input><br>
+                <input type="radio" name="options" id="option3" value="option3"> Optimal - 2 risky & 1 risk-free </input><br>
+            </div>
+            <div>
+                <label for="er_1"> E(r1) </label>
+                <input type="text" name="er_1">
+
+                <label for="er_2"> E(r2) </label>
+                <input type="text" name="er_2">
+            </br>
+                <label for="std_1"> std. dev 1 </label>
+                <input type="text" name="std_1">
+
+                <label for="std_2"> std. dev 2 </label>
+                <input type="text" name="std_2">
+            </br>
+                <label for="eR_1"> E(R1) </label>
+                <input type="text" name="eR_1">
+
+                <label for="eR_2"> E(R2) </label>
+                <input type="text" name="eR_2">
+            </br>
+                <input type="radio" name="coef_or_cov" id="coef" value="coef"> Coef </input>
+                <input type="radio" name="coef_or_cov" id="cov" value="cov"> Cov </input>
+                <label for="coc_val"> </label>
+                <input type="text" name="coc_val">
+            </br>
+                <label for="A_val"> A </label>
+                <input type="text" name="A_val">
+            </div>
+            <div class='button'>
+                <button type="submit">Calculate</button>
+            </div>
+        </form>
+        <br>
+            <div>
+            {{ result8 }}
+            </div>
+    </div>
+    <div>
+        <h3>Portfolio risk (two assets)</h3>
+        <form method="GET" action="/calc_portfolio_risk_two_assets">
+            <div>
+                <input type="radio" name="coef_or_cov" id="coef" value="coef"> Coef </input>
+                <input type="radio" name="coef_or_cov" id="cov" value="cov"> Cov </input>
+                <label for="coc_val"> </label>
+                <input type="text" name="coc_val">
+            </div>
+            <div>
+                <label for="w1"> w1 </label> 
+                <input type="text" name="w1">
+                <label for="w2"> w2 </label> 
+                <input type="text" name="w2">
+            </br>
+                <label for="std_1"> std. dev 1 </label>
+                <input type="text" name="std_1">
+                <label for="std_2"> std. dev 2 </label>
+                <input type="text" name="std_2">
+            </div>
+            <div class='button'>
+                <button type="submit">Calculate</button>
+            </div>
+        </form>
+        <br>
+            <div>
+            {{ result9 }}
+            </div>
+    </div>
     </div>
 </body>
 </html>

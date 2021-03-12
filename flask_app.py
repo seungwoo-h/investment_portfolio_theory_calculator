@@ -107,7 +107,82 @@ def calc_p_weights_amount(num=None):
         except:
             return render_template('index.html', result7='ERROR: Wrong Value')
 
+@app.route('/calc_markowitz_weights', methods=['POST', 'GET'])
+def calc_markowitz_weights(num=None):
+    if request.method == 'POST':
+        pass
+    elif request.method == 'GET':
+        try:
+            choice = request.args.get('options')
+            std_1 = request.args.get('std_1')
+            std_1 = float(std_1)
+            std_2 = request.args.get('std_2')
+            std_2 = float(std_2)
+            if choice == 'option1':
+                co_choice = request.args.get('coef_or_cov')
+                if co_choice == 'coef':
+                    coef = float(request.args.get('coc_val'))
+                    w1, w2 = weights_markowitz_minimum_variance(std_1, std_2, coef=coef)
+                elif co_choice == 'cov':
+                    cov = float(request.args.get('coc_val'))
+                    w1, w2 = weights_markowitz_minimum_variance(std_1, std_2, cov=cov)
+                else:
+                    return render_template('index.html', result8='ERROR: Choose Cov or Coef')
+            elif choice == 'option2':
+                co_choice = request.args.get('coef_or_cov')
+                if co_choice == 'coef':
+                    coef = float(request.args.get('coc_val'))
+                    A = float(request.args.get('A_val'))
+                    er_1 = float(request.args.get('er_1'))
+                    er_2 = float(request.args.get('er_2'))
+                    w1, w2 = weights_markowitz_optimal_two_risky(A, er_1, er_2, std_1, std_2, coef)
+                else:
+                    return render_template('index.html', result8='ERROR: Optimal 2 only supports coef')
+            elif choice == 'option3':
+                co_choice = request.args.get('coef_or_cov')
+                eR_1 = float(request.args.get('eR_1'))
+                eR_2 = float(request.args.get('eR_2'))
+                if co_choice == 'coef':
+                    coef = float(request.args.get('coc_val'))
+                    w1, w2 = weights_markowits_optimal_two_riksy_one_free(eR_1, eR_2, std_1, std_2, coef=coef)
+                elif co_choice == 'cov':
+                    cov = float(request.args.get('coc_val'))
+                    w1, w2 = weights_markowits_optimal_two_riksy_one_free(eR_1, eR_2, std_1, std_2, cov=cov)
+                else:
+                    return render_template('index.html', result8='ERROR: Choose Cov or Coef')
+            else:
+                return render_template('index.html', result8='ERROR: Invalid choice')
+            return render_template('index.html', result8=f'w1: {w1}, w1: {w2}')
+        except:
+            return render_template('index.html', result8='ERROR: Wrong Value')
 
+@app.route('/calc_portfolio_risk_two_assets', methods=['POST', 'GET'])
+def calc_portfolio_risk_two_assets(num=None):
+    if request.method == 'POST':
+        pass
+    elif request.method == 'GET':
+        try:
+            std_1 = request.args.get('std_1')
+            std_1 = float(std_1)
+            std_2 = request.args.get('std_2')
+            std_2 = float(std_2)
+            w1 = request.args.get('w1')
+            w1 = float(w1)
+            w2 = request.args.get('w2')
+            w2 = float(w2)
+            co_choice = request.args.get('coef_or_cov')
+            if co_choice == 'coef':
+                coef = float(request.args.get('coc_val')) 
+                p_risk = portfolio_risk_two_assets(w1, w2, std_1, std_2, coef=coef)
+            elif co_choice == 'cov':
+                cov = float(request.args.get('coc_val'))
+                p_risk = portfolio_risk_two_assets(w1, w2, std_1, std_2, cov=cov)
+            else:
+                return render_template('index.html', result9='ERROR: Choose Cov or Coef')
+
+            return render_template('index.html', result9=f'Result: {p_risk}')
+        except:
+            return render_template('index.html', result9='ERROR: Wrong Value')
 
 if __name__ == '__main__':
     # 외부 접속용
