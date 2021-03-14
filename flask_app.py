@@ -217,7 +217,8 @@ def tb_procedure(num=None):
             result1 = df1.to_html(classes='data')
             if df2 is not None:
                 result2 = df2.to_html(classes='data')
-            return render_template('index.html', tables4=[result1, result2])
+                return render_template('index.html', tables4=[result1, result2])
+            return render_template('index.html', tables4=[result1])
         except:
             return render_template('index.html', result10='ERROR: Wrong Value')
 
