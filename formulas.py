@@ -186,6 +186,52 @@ def two_risky_one_free_total_weights(eR_1, eR_2, std_1, std_2, A, rf, **kwargs):
     w_risky_1, w_risky_2, w_rf = frac_risky * w1, frac_risky * w2, (1 - frac_risky)
     return w_risky_1, w_risky_2, w_rf
 
+################# WEEK 4 & 5 #################
+
+def treynor_black_procedure(alpha_lst, std_dev_lst, beta_lst, eR_M, sd_M, A=None):
+    """
+    Treynor-Black Procedure: Optimal risky portfolio construction for the Single Index Model
+    """
+    df = pd.DataFrame(columns=['alpha', 'std. dev', 'beta'])
+
+    for alpha, std_dev, beta in zip(alpha_lst, std_dev_lst, beta_lst):
+        df = df.append({'alpha': alpha,
+                        'std. dev': std_dev,
+                        'beta': beta}, ignore_index=True)
+
+    df['w0'] = df['alpha'] / df['std. dev']**2
+    df['w'] = df['w0'] / df['w0'].sum()
+    alpha_A = (df['w'] * df['alpha']).sum()
+    var_A = (df['w']**2 * df['std. dev']**2).sum()
+    beta_A = (df['w'] * df['beta']).sum()
+    w_A_0 = (alpha_A / var_A) / (eR_M / sd_M**2)
+    w_A = w_A_0 / (1 + (1 - beta_A) * w_A_0)
+    w_M = 1 - w_A
+    beta_P = w_M + w_A * beta_A
+    eR_P = beta_P * eR_M + w_A * alpha_A
+    sd_P = (beta_P**2 * sd_M**2 + w_A**2 * var_A)**0.5
+    df[['alpha_A', 'var_A', 'beta_A', 'w_A_0', 'w_A', 'w_M', 
+         'beta_P', 'eR_P', 'sd_P']] = alpha_A, var_A, beta_A, w_A_0, w_A, w_M, beta_P, eR_P, sd_P
+    if A:
+        y_hat_active = eR_P / (A * sd_P**2)
+        y_hat_passive = eR_M / (A * sd_M**2)
+        df[['y_hat_active', 'y_hat_passive']] = y_hat_active, y_hat_passive
+        df_final = pd.DataFrame(columns=['Asset', 'Holding (%) (active)', 'Holding (%) (passive)'])
+        df_final = df_final.append({'Asset': 'Risk-free',
+                                    'Holding (%) (active)': (1 - y_hat_active) * 100,
+                                    'Holding (%) (passive)': (1 - y_hat_passive) * 100}, ignore_index=True)
+        df_final = df_final.append({'Asset': 'Market/equity Portfolio',
+                                    'Holding (%) (active)': y_hat_active * w_M * 100,
+                                    'Holding (%) (passive)': y_hat_passive * w_M * 100}, ignore_index=True)
+        for i in range(len(df)):
+            df_final = df_final.append({'Asset': 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[i],
+                                        'Holding (%) (active)': y_hat_active * w_A * df['w'].iloc[i] * 100,
+                                        'Holding (%) (passive)': y_hat_passive * w_A * df['w'].iloc[i] * 100}, ignore_index=True)
+        df_final = round(df_final, 2)
+        return df, df_final
+    df = round(df, 4)
+    return df, None
+
 ##########################################
 
 if __name__ == '__main__':

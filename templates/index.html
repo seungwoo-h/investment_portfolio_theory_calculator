@@ -188,6 +188,46 @@
             {{ result9 }}
             </div>
     </div>
+    <div>
+        <h3>Treynor-Black Procedure</h3>
+        <form method="GET" action="/tb_procedure">
+            <div>
+                <label for="alpha_lst"> [Alphas] seperate with (,) </label>
+                <input type="text" name="alpha_lst" size="8">
+            </div>
+            <div>
+                <label for="sd_lst"> [Std. Devs] seperate with (,) </label>
+                <input type="text" name="sd_lst" size="8">
+            </div>
+            <div>
+                <label for="beta_lst"> [Betas] seperate with (,) </label>
+                <input type="text" name="beta_lst" size="8">
+            </div>
+            <div>
+                <label for="eR_M"> E(Rm) </label>
+                <input type="text" name="eR_M" size="8">
+            </div>
+            <div>
+                <label for="sd_M"> Std. Dev M </label>
+                <input type="text" name="sd_M" size="8">
+            </div>
+            <div>
+                <label for="A_val"> A (optional) </label>
+                <input type="text" name="A_val" size="8">
+            </div>
+            <div class='button'>
+                <button type="submit">Calculate</button>
+            </div>
+        </form>
+        <br>
+            <div>
+                {{ result10 }}
+                {% for table in tables4 %}
+                {{ table|safe }}
+                <br>
+                {% endfor %}
+            </div>
+    </div>
     </div>
 </body>
 </html>

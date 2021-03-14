@@ -194,11 +194,38 @@ def calc_portfolio_risk_two_assets(num=None):
         except:
             return render_template('index.html', result9='ERROR: Wrong Value')
 
+@app.route('/tb_procedure', methods=['POST', 'GET'])
+def tb_procedure(num=None):
+    if request.method == 'POST':
+        pass
+    elif request.method == 'GET':
+        try:
+            alpha_lst = request.args.get('alpha_lst')
+            alpha_lst = list(map(float, alpha_lst.split(',')))
+            sd_lst = request.args.get('sd_lst')
+            sd_lst = list(map(float, sd_lst.split(',')))
+            beta_lst = request.args.get('beta_lst')
+            beta_lst = list(map(float, beta_lst.split(',')))
+            eR_M = float(request.args.get('eR_M'))
+            sd_M = float(request.args.get('sd_M'))
+            A = request.args.get('A_val')
+            if A:
+                A = int(A)
+            else:
+                A = None
+            df1, df2 = treynor_black_procedure(alpha_lst, sd_lst, beta_lst, eR_M, sd_M, A=A)
+            result1 = df1.to_html(classes='data')
+            if df2 is not None:
+                result2 = df2.to_html(classes='data')
+            return render_template('index.html', tables4=[result1, result2])
+        except:
+            return render_template('index.html', result10='ERROR: Wrong Value')
+
 if __name__ == '__main__':
     # 외부 접속용
     # app.run(host='192.168.50.24', debug=True)
     # 로컬 전용
-    app.run(debug=True)
+    # app.run(debug=True)
     # pythonanywhere
-    # if 'liveconsole' not in gethostname():
-    #     app.run(debug=True)
+    if 'liveconsole' not in gethostname():
+        app.run(debug=True)
