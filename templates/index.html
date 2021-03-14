@@ -115,9 +115,9 @@
         <h3>Markowitz Weights</h3>
         <form method="GET" action="/calc_markowitz_weights">
             <div>
-                <input type="radio" name="options" id="option1" value="option1"> Min. Variance - 2 risky </input><br>
-                <input type="radio" name="options" id="option2" value="option2"> Optimal - 2 risky & no risk-free  </input><br>
-                <input type="radio" name="options" id="option3" value="option3"> Optimal - 2 risky & 1 risk-free </input><br>
+                <input type="radio" name="options" id="option1" value="option1"> Min. Variance - 2 risky [REQUIRED: std. dev, cov or coef] </input><br>
+                <input type="radio" name="options" id="option2" value="option2"> Optimal - 2 risky & no risk-free [REQUIRED: std. dev, E(r), coef]  </input><br>
+                <input type="radio" name="options" id="option3" value="option3"> Optimal - 2 risky & 1 risk-free [REQUIRED: std. dev, E(R), cov or coef] </input><br>
             </div>
             <div>
                 <label for="er_1"> E(r1) </label>
