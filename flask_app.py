@@ -152,7 +152,7 @@ def calc_markowitz_weights(num=None):
                     return render_template('index.html', result8='ERROR: Choose Cov or Coef')
             else:
                 return render_template('index.html', result8='ERROR: Invalid choice')
-            return render_template('index.html', result8=f'w1: {w1}, w1: {w2}')
+            return render_template('index.html', result8=f'w1: {w1}, w2: {w2}')
         except:
             return render_template('index.html', result8='ERROR: Wrong Value')
 
