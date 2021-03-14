@@ -174,6 +174,18 @@ def weights_markowits_optimal_two_riksy_one_free(eR_1, eR_2, std_1, std_2, **kwa
     w2 = 1 - w1
     return w1, w2
 
+def optimal_fraction_risky_portfolio(er_p, rf, A, std_p):
+    return (er_p - rf) / (A * std_p**2)
+
+def two_risky_one_free_total_weights(eR_1, eR_2, std_1, std_2, A, rf, **kwargs):
+    cov = cov_finder(kwargs, std_1, std_2)
+    w1, w2 = weights_markowits_optimal_two_riksy_one_free(eR_1, eR_2, std_1, std_2, cov=cov)
+    er_p = portfolio_return_two_assets(w1, w2, eR_1 + rf, eR_2 + rf)
+    std_p = portfolio_risk_two_assets(w1, w2, std_1, std_2, cov=cov)
+    frac_risky = optimal_fraction_risky_portfolio(er_p, rf, A, std_p)
+    w_risky_1, w_risky_2, w_rf = frac_risky * w1, frac_risky * w2, (1 - frac_risky)
+    return w_risky_1, w_risky_2, w_rf
+
 ##########################################
 
 if __name__ == '__main__':

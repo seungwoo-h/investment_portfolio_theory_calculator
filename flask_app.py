@@ -145,9 +145,19 @@ def calc_markowitz_weights(num=None):
                 if co_choice == 'coef':
                     coef = float(request.args.get('coc_val'))
                     w1, w2 = weights_markowits_optimal_two_riksy_one_free(eR_1, eR_2, std_1, std_2, coef=coef)
+                    if request.args.get('c_option'):
+                        rf = float(request.args.get('rf'))
+                        A = float(request.args.get('A_val'))
+                        w_risky_1, w_risky_2, w_rf = two_risky_one_free_total_weights(eR_1, eR_2, std_1, std_2, A, rf, coef=coef)
+                        return render_template('index.html', result8=f'w risky 1: {w_risky_1}, w risky 2: {w_risky_2}, w rf: {w_rf} | optimal risky fraction: {1-w_rf}, w1: {w1}, w2: {w2}')
                 elif co_choice == 'cov':
                     cov = float(request.args.get('coc_val'))
                     w1, w2 = weights_markowits_optimal_two_riksy_one_free(eR_1, eR_2, std_1, std_2, cov=cov)
+                    if request.args.get('c_option'):
+                        rf = float(request.args.get('rf'))
+                        A = float(request.args.get('A_val'))
+                        w_risky_1, w_risky_2, w_rf = two_risky_one_free_total_weights(eR_1, eR_2, std_1, std_2, A, rf, cov=cov)
+                        return render_template('index.html', result8=f'w risky 1: {w_risky_1}, w risky 2: {w_risky_2}, w rf: {w_rf} | optimal risky fraction: {1-w_rf}, w1: {w1}, w2: {w2}')
                 else:
                     return render_template('index.html', result8='ERROR: Choose Cov or Coef')
             else:
@@ -188,7 +198,7 @@ if __name__ == '__main__':
     # 외부 접속용
     # app.run(host='192.168.50.24', debug=True)
     # 로컬 전용
-    # app.run(debug=True)
+    app.run(debug=True)
     # pythonanywhere
-    if 'liveconsole' not in gethostname():
-        app.run(debug=True)
+    # if 'liveconsole' not in gethostname():
+    #     app.run(debug=True)
